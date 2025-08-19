@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TICAware</title>
+  <style>
+    body {
+      font-family: "Comic Sans MS", sans-serif;
+      background-color: #f8faff;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      color: #333;
+    }
+    header {
+      background: #a5d8ff;
+      padding: 30px 10px;
+      border-bottom: 4px solid #74c0fc;
+    }
+    header h1 {
+      font-size: 60px;
+      color: #1c7ed6;
+      margin: 0;
+      text-shadow: 2px 2px #dee2e6;
+    }
+    header h2 {
+      font-size: 20px;
+      color: #5c3d2e;
+      margin-top: 10px;
+    }
+    .intro {
+      padding: 20px;
+      font-size: 18px;
+      max-width: 800px;
+      margin: auto;
+      line-height: 1.6;
+    }
+    .flashcards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      padding: 20px;
+    }
+    .card {
+      background: #fff3bf;
+      border: 2px solid #ffd43b;
+      border-radius: 15px;
+      padding: 20px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+    .answer {
+      display: none;
+      margin-top: 10px;
+      color: #495057;
+      font-size: 15px;
+    }
+    .ticafish {
+      margin: 30px auto;
+      width: 120px;
+      cursor: pointer;
+    }
+    #info-box {
+      display: none;
+      background: #e7f5ff;
+      border: 2px dashed #74c0fc;
+      padding: 20px;
+      margin: 20px auto;
+      width: 60%;
+      border-radius: 15px;
+    }
+    footer {
+      background: #f1f3f5;
+      padding: 20px;
+      margin-top: 40px;
+    }
+    footer p {
+      margin: 5px 0;
+    }
+    /* Chat box */
+    #chatbox {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #d0ebff;
+      border: 2px solid #74c0fc;
+      border-radius: 15px;
+      padding: 10px 15px;
+      font-size: 14px;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>TICAware</h1>
+    <h2>Hiểu về TIC - Hạn chế TIC - Hỗ trợ TIC-ers</h2>
+  </header>
+
+  <div class="intro">
+    <p><b>TICAware</b> - Nơi mang đến kiến thức, thông tin bổ ích về hội chứng TIC do một nhóm học sinh tại trường THPT Trần Phú TP. Hồ Chí Minh sáng lập.</p>
+    <p>Bởi vì đây là một trang web phục vụ cho dự án nghiên cứu khoa học cấp trung học phổ thông nên <b>CẦN PHẢI ĐẢM BẢO ĐẦY ĐỦ ĐIỀU KIỆN VÀ THÔNG TIN</b> để có thể đăng công khai.</p>
+  </div>
+
+  <h2>📘 Flashcards về hội chứng TIC</h2>
+  <div class="flashcards">
+    <div class="card" onclick="toggleAnswer(this)">
+      Hội chứng TIC là gì?
+      <div class="answer">Là rối loạn vận động thần kinh gây ra những cử động hoặc âm thanh lặp đi lặp lại ngoài ý muốn.</div>
+    </div>
+    <div class="card" onclick="toggleAnswer(this)">
+      Biểu hiện của TIC?
+      <div class="answer">Chớp mắt, nhăn mặt, lắc đầu, hắng giọng, tạo âm thanh lặp lại...</div>
+    </div>
+    <div class="card" onclick="toggleAnswer(this)">
+      Các giai đoạn phát triển?
+      <div class="answer">Thường khởi phát ở trẻ em, có thể tăng dần ở tuổi thiếu niên, và giảm bớt khi trưởng thành.</div>
+    </div>
+    <div class="card" onclick="toggleAnswer(this)">
+      TIC có phổ biến không?
+      <div class="answer">Khá phổ biến, đặc biệt ở trẻ em, nhưng nhiều trường hợp nhẹ và có thể tự hết.</div>
+    </div>
+    <div class="card" onclick="toggleAnswer(this)">
+      TIC có chữa khỏi được không?
+      <div class="answer">Có thể kiểm soát bằng liệu pháp hành vi, thuốc hoặc hỗ trợ tâm lý, nhưng tùy từng mức độ.</div>
+    </div>
+  </div>
+
+  <h2>🎮 Trò chơi cùng TICAFish</h2>
+  <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="TICAFish" class="ticafish" onclick="showInfo()">
+  <p><i>TICAFish - linh vật đồng hành cùng bạn trong hành trình tìm hiểu về TIC</i></p>
+
+  <div id="info-box"></div>
+
+  <footer>
+    <p>📞 Liên hệ: 0368571409</p>
+    <p>📧 Email: anhnguyen100529@gmail.com</p>
+  </footer>
+
+  <!-- Chatbox -->
+  <div id="chatbox">
+    📞 0368571409 <br>
+    <b>Bạn có cần hỗ trợ gì không?</b>
+  </div>
+
+  <script>
+    function toggleAnswer(card) {
+      let ans = card.querySelector(".answer");
+      ans.style.display = ans.style.display === "block" ? "none" : "block";
+    }
+
+    const infos = [
+      "TIC thường xuất hiện ở trẻ em từ 5-10 tuổi.",
+      "Nguyên nhân chưa rõ ràng, có yếu tố di truyền và môi trường.",
+      "Stress có thể làm TIC nặng hơn.",
+      "Hỗ trợ từ gia đình và bạn bè rất quan trọng.",
+      "Nhiều người mắc TIC có thể sống khỏe mạnh bình thường."
+    ];
+    let current = 0;
+    function showInfo() {
+      document.getElementById("info-box").style.display = "block";
+      document.getElementById("info-box").innerText = infos[current];
+      current = (current + 1) % infos.length;
+    }
+  </script>
+</body>
+</html>
